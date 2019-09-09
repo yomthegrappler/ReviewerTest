@@ -12,15 +12,22 @@ class SeleniumDriver:
         return True
 
     def getElement(self, locator):
-        time.sleep(0.4)
+        time.sleep(0.6)
         element = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((By.XPATH, locator)))
         return element
 
     def sendKeys(self, data, locator):
-        self.getElement(locator).clear()
-        self.getElement(locator).send_keys(data)
-        return True
+        try:
+            self.getElement(locator).clear()
+            self.getElement(locator).send_keys(data)
+            return True
+
+        except:
+            return False
 
     def elementClick(self, locator):
-        self.getElement(locator).click()
-        return True
+        try:
+            self.getElement(locator).click()
+            return True
+        except:
+            return False

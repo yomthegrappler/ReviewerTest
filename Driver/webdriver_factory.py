@@ -1,6 +1,5 @@
 from selenium import webdriver
 from Utility.constant import Constant
-import os
 
 class GetWebdriverInstance:
 
@@ -12,23 +11,22 @@ class GetWebdriverInstance:
         if self.browser == 'chrome':
 
             driverLocation = self.constant.Path_Chrome_Driver
-            os.environ["webdriver.chrome.driver"] = driverLocation
             driver = webdriver.Chrome(executable_path=driverLocation)
+
             driver.maximize_window()
             driver.implicitly_wait(5)
             driver.delete_all_cookies()
-            print("Initialized with Google Chrome")
+            return driver
 
         elif self.browser == 'firefox':
 
             path = self.constant.Path_Firefox_Driver
             driver = webdriver.Firefox(executable_path=path)
+
             driver.maximize_window()
             driver.implicitly_wait(5)
             driver.delete_all_cookies()
-            print("Initialized with Firefox")
+            return driver
 
         else:
             print("Please make sure selected browser is correct")
-
-        return driver
